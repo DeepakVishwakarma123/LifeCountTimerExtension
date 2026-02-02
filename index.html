@@ -1,0 +1,22 @@
+<!doctype html>
+<body>
+<p id="p">are you
+</p>
+
+<div>
+   this is some text 
+  <p> hello thsi is child node</p>
+</div>
+<h1 id="head"> hello hii how are you </h1>
+<script>
+  let headingToinsert=document.querySelector("#head")
+  let range = new Range();
+  range.setStart(p.firstChild,5);
+  range.setEnd(p.firstChild,0);
+ let docFrag=range.cloneContents() 
+ range.surroundContents(headingToinsert)
+ console.log(docFrag)
+  // toString of a range returns its content as text
+  console.log(range.toString()); // ll
+</script>
+</body>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>selection api</title>
+</head>
+<body>
+    <div>
+        hello this text is inside div
+    </div>
+    <p> this is simple paragraph </p>
+    <!-- selection api understanding -->
+    <script>
+        let selectobj=window.getSelection()
+        document.addEventListener(
+            'selectionchange',() => {
+                console.log(selectobj)
+                console.log(selectobj.type)
+            }
+        )
+    </script>
+</body>
+</html>
