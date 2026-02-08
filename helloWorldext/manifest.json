@@ -1,0 +1,10 @@
+{
+  "name": "demo extension",
+  "description": "demo first extension with image",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "demo.html",
+    "default_icon": "meditating_bunny.png"
+  }
+}
