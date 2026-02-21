@@ -1,0 +1,158 @@
+body{
+    background-color: black;
+    color: white;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container1{
+    background-color:transparent;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    flex-direction: column;  
+    z-index: -1;
+}
+h1{
+    font-size: 2.5rem;
+    text-align: center;
+    font-weight: 900;
+}
+.timedata{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.heading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+p{
+    font-size:3rem;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+}
+
+.titlebox{
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titlebtn{
+    width: 60%;
+    font-size:x-large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 10px;
+    background-color:transparent;
+    color: white;
+
+    /* font-size: 100%; */
+}
+
+.dataget{
+    padding: 20px;
+    background-color: rgb(82, 35, 35);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    display: none;
+}
+.main{
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.formtitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.datagetheading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: smaller;
+    text-align: center;
+}
+.inputarea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* background-color: purple; */
+    /* gap: 10px; */
+}
+.dateinput{
+    width: 90%;
+    padding: 10px;
+}
+
+button{
+    background-color: orangered;
+}
+
+.lifebtn{
+    background-color: orangered;
+    width: 40%;
+    padding: 2px;
+}
+.eventbtn{
+    background-color: aquamarine;
+    width: 35%;
+    padding: 2px;
+}
+
+.countbtncombo{
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+}
+
+.togglemenu{
+    position: absolute;
+}
+
+.customevent{
+    background-color: red;
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+    padding: 10px;
+    /* align-items: center; */
+}
+
+.innerbox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    background-color: purple;
+    gap: 5px;
+}
