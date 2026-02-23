@@ -19,6 +19,8 @@ let customeventbox=document.querySelector(".customevent")
 let inputArea=document.querySelector(".inputarea")
 let ismenuhiddenactive;
 let isClickedinsideBox;
+//without leap year
+let monthsTotalDays=[31,28,31,30,31,30,31,31,30,31,30,31]
 
 
 togglemenu.addEventListener('click',() => {
@@ -62,3 +64,57 @@ lifecountButton.addEventListener('click',() => {
 })
 
 
+//let,s work on life span timer first of all
+/*
+imagine the average life a person can leave
+expecing a person can leave 80years  
+*/
+
+
+
+function printCurrentChosedDate()
+{
+    let currentDateobject=new Date()
+   
+    let currentHour=currentDateobject.getHours()
+    let currentMinutes=currentDateobject.getMinutes()
+    let currentSeconds=currentDateobject.getSeconds()
+    let currentMilliseconds=currentDateobject.getMilliseconds()
+    let userDateOfbirth=dateinput.value
+    let dobDateobject=new Date(`${userDateOfbirth}`)
+    dobDateobject.setHours(currentHour)
+    dobDateobject.setMinutes(currentMinutes)
+    dobDateobject.setSeconds(currentSeconds)
+    dobDateobject.setMilliseconds(currentMilliseconds)
+
+    //calulate the year from current year after 80 years 
+    let estimateYear=dobDateobject.getFullYear()+80
+    let estimatedDateObject=new Date(`${estimateYear}`)
+     console.log(estimateYear)
+    //2106-1-1-5.30am milliseonds
+    //remainng things after minusing these numbers
+    calculateRemainingTimes(dobDateobject,estimatedDateObject,currentDateobject)
+
+
+}
+
+function calculateRemainingTimes(startDate,endDate,currentDateObject)
+{
+    //finding the passedTime First of userbased on data
+    let passedYears=currentDateObject.getFullYear()-startDate.getFullYear()
+}
+
+function checkWhetherLeapYear()
+{
+    
+}
+//edge cases
+//same year
+//past times
+//same day to day
+//fixing things
+//-1 years if the month is not reached in current years
+
+startButton.addEventListener('click',printCurrentChosedDate,false)
+
+//calulation parts comes here which is matters a lot and this is hardest part of this things
