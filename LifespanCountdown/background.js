@@ -97,12 +97,13 @@ function printCurrentChosedDate()
     //2106-1-1-5.30am milliseonds
     //remainng things after minusing these numbers
     calculateRemainingTimes(dobDateobject,estimatedDateObject,currentDateobject)
-
+    console.log("test")
 
 }
 
 function calculateRemainingTimes(startDate,endDate,currentDateObject)
-{
+{   
+    console.log("ehllo we are insdie this object")
     //finding the passedTime First of userbased on data
     let passedYears=currentFullYear-startDate.getFullYear()
     if(currentDate===startDate.getDate() && currentMonthCount===startDate.getMonth())
@@ -121,8 +122,9 @@ function calculateRemainingTimes(startDate,endDate,currentDateObject)
     }
     else{
         passedYears-=1
-        let monthDayCountObject=countMonthsAndRemaningDays()
-        //now call the countMonthAndRemaingDays
+        let monthDayCountObject=countMonthsAndRemaningDays(startDate)
+        console.log("remaingn month days extras",monthDayCountObject)
+
 
     }
 
@@ -135,7 +137,10 @@ function calculateRemainingTimes(startDate,endDate,currentDateObject)
 
 
 let countMonthsAndRemaningDays=(startDate) => {
+    
 
+    let dobMonth=startDate.getMonth()
+    let ActiveDay=startDate.getDate()
     // local  function variable for tracking days number count in case of leapYear
     let monthDayCountObject
     let anotherMonthDayObject
@@ -143,10 +148,10 @@ let countMonthsAndRemaningDays=(startDate) => {
     let isleapyearDob=checkWhetherLeapYear(startDate.getFullYear())
     let isCurrentYearLeapYear=checkWhetherLeapYear(currentFullYear)
     if(isleapyearDob)
-    {
+    {   
         let sepearateMonthsTotalDays=monthsTotalDays.slice(0)
         sepearateMonthsTotalDays[1]=sepearateMonthsTotalDays[1]+1
-        monthDayCountObject=loopThroughMonthDayCountArray(sepearateMonthsTotalDays)
+        monthDayCountObject=loopThroughMonthDayCountArray(sepearateMonthsTotalDays,dobMonth,ActiveDay)
         //using different arrays for a in the case of leapYear to the preventing things get collapse
     }
 
@@ -160,14 +165,19 @@ let countMonthsAndRemaningDays=(startDate) => {
     {   
         let AnothermonthsTotalDays=monthsTotalDays.slice(0)
         AnothermonthsTotalDays[1]=AnothermonthsTotalDays[1]+1
-        anotherMonthDayObject=loopThroughMonthDayCountArray(AnothermonthsTotalDays)
+        anotherMonthDayObject=loopThroughMonthDayCountArray(AnothermonthsTotalDays,currentMonthCount,currentDate)
     }
     
     //in the case of both years are leap years
     if(typeof(monthDayCountObject)==="object" && typeof(anotherMonthDayObject)==="object")
-    {
+    {   
+        console.log("inside1")
         //calculat the final total days
-        
+        let arrayOfmonthday=Object.values(monthDayCountObject)
+        let arrayofAnotherDay=Object.values(anotherMonthDayObject)
+        let totalMonthCount=arrayOfmonthday[0]+arrayofAnotherDay[0]
+        let totalDayCount=anotherMonthDayObject[1]+arrayofAnotherDay[1]
+        return {monthCount:totalMonthCount,dayCount:totalDayCount}
 
         //return that object from here
     }
@@ -175,23 +185,68 @@ let countMonthsAndRemaningDays=(startDate) => {
     else if(typeof(monthDayCountObject)==="object" || typeof(anotherMonthDayObject)==="object")
     {  
         //check in which has dayCountObject
-        // call the function first of all
-        
-        //return that object from here
+        let totalMonthDayCountObject=loopThroughMonthDayCountArray(monthsTotalDays,currentMonthCount,currentDate)
+        let currentMonthCountDay=Object.values(totalMonthDayCountObject)     
+        if(monthDayCountObject)
+        {  
+            console.log("inside two")
+           let arrayOfmonthday=Object.values(monthDayCountObject)
+           let monthCount=arrayOfmonthday[0]+currentMonthCountDay[0]
+           let dayCount=arrayOfmonthday[1]+currentMonthCountDay[1]
+           return {monthCount:monthCount,dayCount:dayCount}
+        }
+        if(anotherMonthDayObject)
+        {  
+            console.log("inside three")
+           let arrayOfmonthday=Object.values(anotherMonthDayObject)
+           let monthCount=arrayOfmonthday[0]+currentMonthCountDay[0]
+           let dayCount=arrayOfmonthday[1]+currentMonthCountDay[1]
+           return {monthCount:monthCount,dayCount:dayCount}
+        }
     }
     // only neither first leap Yer not second
     else{
-        let finalMonthDayCount=loopThroughMonthDayCountArray(monthsTotalDays)
-        return finalMonthDayCount
+        console.log("inside four")
+        //the year is neither a leap year start or current show we gone use by default array!!!
+        let finalMonthDayCount=loopThroughMonthDayCountArray(monthsTotalDays,currentMonthCount,currentDate)
+        console.log("hello hii bro simple ahi na ki nhi",finalMonthDayCount)
+        let dobMonthDayCount=loopThroughMonthDayCountArray(monthsTotalDays,dobMonth,ActiveDay)
+        let dobMonthDayCountArray=Object.values(dobMonthDayCount)
+        let currentMonthDay=Object.values(finalMonthDayCount)
+        let monthCount=dobMonthDayCountArray[0]+currentMonthDay[0]
+        let dayCount=dobMonthDayCountArray[1]+currentMonthDay[1]
+        return {
+            monthCount:monthCount,
+            dayCount:dayCount
+        }
     }
 
     //this function checks extra times which is not added into months
 }
 
 
-function loopThroughMonthDayCountArray(monthsTotalDays)
+function loopThroughMonthDayCountArray(monthsTotalDays,monthCount,ActiveDay)
 {
-
+    //grab the dobMonthCount Days from array;
+    let dobMonthCountTotalDays=monthsTotalDays[monthCount]
+    let remainngMontCounts=monthsTotalDays.length-monthCount
+    //i want to check whether the entered is in the end or not
+    if(dobMonthCountTotalDays===ActiveDay)
+    {
+        //don,t do extra things
+        //just tell the remaning length of array
+        return {
+            monthCount:remainngMontCounts,
+            dayCount:0
+        }
+    }
+    else{
+        let remaningDays=dobMonthCountTotalDays-ActiveDay
+        return {
+            monthCount:remainngMontCounts,
+            dayCount:remaningDays
+        }
+    }
 }
 
 
