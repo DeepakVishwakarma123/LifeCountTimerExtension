@@ -185,7 +185,7 @@ let countMonthsAndRemaningDays=(startDate) => {
     else if(typeof(monthDayCountObject)==="object" || typeof(anotherMonthDayObject)==="object")
     {  
         //check in which has dayCountObject
-        let totalMonthDayCountObject=loopThroughMonthDayCountArray(monthsTotalDays,currentMonthCount,currentDate)
+        let totalMonthDayCountObject=loopThroughCurrentYearMonthDays(monthsTotalDays,currentMonthCount,currentDate)
         let currentMonthCountDay=Object.values(totalMonthDayCountObject)     
         if(monthDayCountObject)
         {  
@@ -208,9 +208,10 @@ let countMonthsAndRemaningDays=(startDate) => {
     else{
         console.log("inside four")
         //the year is neither a leap year start or current show we gone use by default array!!!
-        let finalMonthDayCount=loopThroughMonthDayCountArray(monthsTotalDays,currentMonthCount,currentDate)
+        let finalMonthDayCount=loopThroughCurrentYearMonthDays(monthsTotalDays,currentMonthCount,currentDate)
         console.log("hello hii bro simple ahi na ki nhi",finalMonthDayCount)
         let dobMonthDayCount=loopThroughMonthDayCountArray(monthsTotalDays,dobMonth,ActiveDay)
+        console.log("dob moth count days are here",dobMonthDayCount)
         let dobMonthDayCountArray=Object.values(dobMonthDayCount)
         let currentMonthDay=Object.values(finalMonthDayCount)
         let monthCount=dobMonthDayCountArray[0]+currentMonthDay[0]
@@ -224,12 +225,14 @@ let countMonthsAndRemaningDays=(startDate) => {
     //this function checks extra times which is not added into months
 }
 
-
+//user for previous years
 function loopThroughMonthDayCountArray(monthsTotalDays,monthCount,ActiveDay)
 {
     //grab the dobMonthCount Days from array;
-    let dobMonthCountTotalDays=monthsTotalDays[monthCount]
-    let remainngMontCounts=monthsTotalDays.length-monthCount
+        let dobMonthCountTotalDays=monthsTotalDays[monthCount]
+        let increaseMonthCountByone=monthCount+1
+        let remainngMontCounts=(monthsTotalDays.length)-increaseMonthCountByone
+        console.log(remainngMontCounts)
     //i want to check whether the entered is in the end or not
     if(dobMonthCountTotalDays===ActiveDay)
     {
@@ -248,6 +251,38 @@ function loopThroughMonthDayCountArray(monthsTotalDays,monthCount,ActiveDay)
         }
     }
 }
+
+
+//use this function for current year
+function loopThroughCurrentYearMonthDays(monthsTotalDays,monthCount,ActiveDay)
+{
+     let currenMonthTotalDaysCount=monthsTotalDays[monthCount]
+     
+
+        //grab the dobMonthCount Days from array;
+        let remainngMontCounts=monthCount+1
+    //i want to check whether the entered is in the end or not
+    if(currenMonthTotalDaysCount===ActiveDay)
+    {
+        //don,t do extra things
+        //just tell the remaning length of array
+        return {
+            monthCount:remainngMontCounts,
+            dayCount:0
+        }
+    }
+    else{
+        let remaningDays=currenMonthTotalDaysCount
+        return {
+            // fixing the issue and calcualte the final remaning month 
+            monthCount:remainngMontCounts-1,
+            dayCount:remaningDays
+        }
+    }
+}
+
+
+
 
 
 function checkWhetherLeapYear(year)
